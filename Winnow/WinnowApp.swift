@@ -18,8 +18,9 @@ struct WinnowApp: App {
             ContentView()
         }
         .windowStyle(.hiddenTitleBar)
-        .defaultSize(width: 500, height: 400)
+        .defaultSize(width: 400, height: 400)
         .windowResizability(.contentSize)
+        .windowLevel(.floating)
     }
 
     @discardableResult
