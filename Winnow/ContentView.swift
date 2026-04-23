@@ -5,6 +5,7 @@
 //  Created by Ian Ynda-Hummel on 4/22/26.
 //
 
+import Silica
 import SwiftUI
 
 struct ContentView: View {
@@ -12,7 +13,7 @@ struct ContentView: View {
     @State private var query = ""
     @FocusState private var searchFocused: Bool
 
-    var filtered: [SIWindow] {
+    var filtered: [Window] {
         guard !query.isEmpty else { return store.windows }
         return store.windows.filter {
             $0.title?.localizedCaseInsensitiveContains(query) == true
@@ -31,7 +32,7 @@ struct ContentView: View {
 
             List(filtered, id: \.windowID) { window in
                 Button(window.title ?? "") {
-                    store.focus(window)
+                    window.focus()
                 }
                 .buttonStyle(.plain)
                 .padding(.vertical, 4)
