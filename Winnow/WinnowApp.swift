@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct WinnowApp: App {
+    init() {
+        confirmAccessibilityPermissions()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -16,5 +20,11 @@ struct WinnowApp: App {
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 500, height: 400)
         .windowResizability(.contentSize)
+    }
+
+    @discardableResult
+    private func confirmAccessibilityPermissions() -> Bool {
+        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as String: true]
+        return AXIsProcessTrustedWithOptions(options as CFDictionary)
     }
 }
