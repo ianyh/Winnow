@@ -1,13 +1,13 @@
 //
-//  PrefixUITests.swift
-//  PrefixUITests
+//  WinnowUITests.swift
+//  WinnowUITests
 //
 //  Created by Ian Ynda-Hummel on 4/22/26.
 //
 
 import XCTest
 
-final class PrefixUITests: XCTestCase {
+final class WinnowUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,13 +1,13 @@
 //
-//  PrefixUITestsLaunchTests.swift
-//  PrefixUITests
+//  WinnowUITestsLaunchTests.swift
+//  WinnowUITests
 //
 //  Created by Ian Ynda-Hummel on 4/22/26.
 //
 
 import XCTest
 
-final class PrefixUITestsLaunchTests: XCTestCase {
+final class WinnowUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

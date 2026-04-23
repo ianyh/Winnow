@@ -1,0 +1,47 @@
+//
+//  ContentView.swift
+//  Winnow
+//
+//  Created by Ian Ynda-Hummel on 4/22/26.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var store = WindowStore()
+    @State private var query = ""
+    @FocusState private var searchFocused: Bool
+
+    var filtered: [SIWindow] {
+        guard !query.isEmpty else { return store.windows }
+        return store.windows.filter {
+            $0.title?.localizedCaseInsensitiveContains(query) == true
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            TextField("Search windows...", text: $query)
+                .textFieldStyle(.plain)
+                .font(.title2)
+                .padding()
+                .focused($searchFocused)
+
+            Divider()
+
+            List(filtered, id: \.windowID) { window in
+                Button(window.title ?? "") {
+                    store.focus(window)
+                }
+                .buttonStyle(.plain)
+                .padding(.vertical, 4)
+            }
+            .listStyle(.plain)
+        }
+        .frame(width: 500, height: 400)
+        .onAppear {
+            store.load()
+            searchFocused = true
+        }
+    }
+}
