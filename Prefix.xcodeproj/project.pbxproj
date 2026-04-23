@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		40712C9C2F99A5790032E1BE /* Silica in Frameworks */ = {isa = PBXBuildFile; productRef = 40712C9B2F99A5790032E1BE /* Silica */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		40712C7E2F99A4B10032E1BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40712C9C2F99A5790032E1BE /* Silica in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Prefix;
 			packageProductDependencies = (
+				40712C9B2F99A5790032E1BE /* Silica */,
 			);
 			productName = Prefix;
 			productReference = 40712C702F99A4AF0032E1BE /* Prefix.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 40712C672F99A4AF0032E1BE;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				40712C9A2F99A5790032E1BE /* XCRemoteSwiftPackageReference "silica" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 40712C712F99A4AF0032E1BE /* Products */;
 			projectDirPath = "";
@@ -573,6 +582,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		40712C9A2F99A5790032E1BE /* XCRemoteSwiftPackageReference "silica" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ianyh/silica";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		40712C9B2F99A5790032E1BE /* Silica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40712C9A2F99A5790032E1BE /* XCRemoteSwiftPackageReference "silica" */;
+			productName = Silica;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 40712C682F99A4AF0032E1BE /* Project object */;
 }

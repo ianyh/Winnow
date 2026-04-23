@@ -1,0 +1,15 @@
+{
+  "originHash" : "14eb1670431f72b5a5a000c5d2ae0d5bcc30dd26d184c8520de8e229a25c0b3a",
+  "pins" : [
+    {
+      "identity" : "silica",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ianyh/silica",
+      "state" : {
+        "branch" : "master",
+        "revision" : "237b2aeba4e59279e2d4e2b0fe637994f9823257"
+      }
+    }
+  ],
+  "version" : 3
+}
