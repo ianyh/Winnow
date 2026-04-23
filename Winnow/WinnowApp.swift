@@ -1,10 +1,3 @@
-//
-//  WinnowApp.swift
-//  Winnow
-//
-//  Created by Ian Ynda-Hummel on 4/22/26.
-//
-
 import SwiftUI
 
 @main
@@ -17,10 +10,16 @@ struct WinnowApp: App {
         WindowGroup {
             ContentView()
         }
-        .windowStyle(.hiddenTitleBar)
-        .defaultSize(width: 400, height: 400)
-        .windowResizability(.contentSize)
         .windowLevel(.floating)
+        .windowResizability(.contentSize)
+        .windowStyle(.hiddenTitleBar)
+        .defaultWindowPlacement { content, context in
+            let size = content.sizeThatFits(.unspecified)
+            let originX = context.defaultDisplay.bounds.midX - (size.width / 2.0)
+            let originY = context.defaultDisplay.bounds.midY - (size.height / 2.0)
+            let position = CGPoint(x: originX.rounded(), y: originY.rounded())
+            return WindowPlacement(position, size: size)
+        }
     }
 
     @discardableResult

@@ -1,10 +1,3 @@
-//
-//  Window.swift
-//  Winnow
-//
-//  Created by Ian Ynda-Hummel on 4/22/26.
-//
-
 import Silica
 
 struct Window {
