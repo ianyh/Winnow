@@ -9,9 +9,12 @@ struct WinnowApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .toolbarVisibility(.hidden, for: .windowToolbar)
+                .ignoresSafeArea()
         }
         .windowLevel(.floating)
         .windowResizability(.contentSize)
+        .restorationBehavior(.disabled)
         .windowStyle(.hiddenTitleBar)
         .defaultWindowPlacement { content, context in
             let size = content.sizeThatFits(.unspecified)

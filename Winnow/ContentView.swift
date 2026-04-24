@@ -32,7 +32,7 @@ struct ContentView: View {
             }
             .listStyle(.plain)
         }
-        .frame(width: 500, height: 400)
+        .frame(width: 400, height: 400)
         .onAppear {
             store.load()
             searchFocused = true
