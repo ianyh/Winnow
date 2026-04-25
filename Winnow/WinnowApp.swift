@@ -24,6 +24,10 @@ struct WinnowApp: App {
             let position = CGPoint(x: originX.rounded(), y: originY.rounded())
             return WindowPlacement(position, size: size)
         }
+
+        Settings {
+            SettingsView()
+        }
     }
 
     @discardableResult
