@@ -1,13 +1,16 @@
+import KeyboardShortcuts
 import SwiftUI
 
 @main
 struct WinnowApp: App {
+    @State private var appState = AppState()
+
     init() {
         confirmAccessibilityPermissions()
     }
 
     var body: some Scene {
-        WindowGroup {
+        Window("Window Search", id: "search-window") {
             ContentView()
                 .containerBackground(.thinMaterial, for: .window)
                 .toolbarVisibility(.hidden, for: .windowToolbar)
@@ -34,5 +37,16 @@ struct WinnowApp: App {
     private func confirmAccessibilityPermissions() -> Bool {
         let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as String: true]
         return AXIsProcessTrustedWithOptions(options as CFDictionary)
+    }
+}
+
+@MainActor
+@Observable
+final class AppState {
+    init() {
+        KeyboardShortcuts.onKeyUp(for: .launch) {
+            NSApp.unhide(nil)
+            NSRunningApplication.current.activate(options: [.activateAllWindows])
+        }
     }
 }

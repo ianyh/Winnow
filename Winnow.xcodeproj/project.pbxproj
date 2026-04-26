@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40712C9C2F99A5790032E1BE /* Silica in Frameworks */ = {isa = PBXBuildFile; productRef = 40712C9B2F99A5790032E1BE /* Silica */; };
+		409AF9AD2F9C47A100E212F5 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 409AF9AC2F9C47A100E212F5 /* KeyboardShortcuts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40712C9C2F99A5790032E1BE /* Silica in Frameworks */,
+				409AF9AD2F9C47A100E212F5 /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +120,7 @@
 			name = Winnow;
 			packageProductDependencies = (
 				40712C9B2F99A5790032E1BE /* Silica */,
+				409AF9AC2F9C47A100E212F5 /* KeyboardShortcuts */,
 			);
 			productName = Winnow;
 			productReference = 40712C702F99A4AF0032E1BE /* Winnow.app */;
@@ -203,6 +206,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				40712C9A2F99A5790032E1BE /* XCRemoteSwiftPackageReference "silica" */,
+				409AF9AB2F9C47A100E212F5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 40712C712F99A4AF0032E1BE /* Products */;
@@ -411,6 +415,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,6 +447,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -590,6 +596,14 @@
 				kind = branch;
 			};
 		};
+		409AF9AB2F9C47A100E212F5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -597,6 +611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 40712C9A2F99A5790032E1BE /* XCRemoteSwiftPackageReference "silica" */;
 			productName = Silica;
+		};
+		409AF9AC2F9C47A100E212F5 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 409AF9AB2F9C47A100E212F5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
