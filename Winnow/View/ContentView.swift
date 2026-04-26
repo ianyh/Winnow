@@ -4,10 +4,14 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @State private var store = AppWindowStore()
+    @State private var store: AppWindowStore
     @State private var query = ""
     @State private var selectedIndex = 0
     @FocusState private var searchFocused: Bool
+
+    init(store: AppWindowStore? = nil) {
+        _store = State(initialValue: store ?? AppWindowStore())
+    }
 
     var filtered: [AppWindow] {
         guard !query.isEmpty else { return store.windows }
@@ -101,3 +105,19 @@ struct ContentView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Populated") {
+    ContentView(store: AppWindowStore(previewWindows: [
+        AppWindow(title: "Safari — Apple Developer", windowID: 1),
+        AppWindow(title: "Xcode — Winnow", windowID: 2),
+        AppWindow(title: "Terminal — winnow", windowID: 3),
+        AppWindow(title: "Slack — engineering", windowID: 4),
+        AppWindow(title: "Notes — Window Manager Plans", windowID: 5),
+    ]))
+}
+
+#Preview("Empty") {
+    ContentView(store: AppWindowStore(previewWindows: []))
+}
+#endif

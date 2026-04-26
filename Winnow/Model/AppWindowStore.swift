@@ -38,8 +38,21 @@ final class AppWindowStore {
     ])
 
     private(set) var windows: [AppWindow] = []
+    private let isPreview: Bool
+
+    init() {
+        self.isPreview = false
+    }
+
+    #if DEBUG
+    init(previewWindows: [AppWindow]) {
+        self.windows = previewWindows
+        self.isPreview = true
+    }
+    #endif
 
     func load() async {
+        guard !isPreview else { return }
         windows = await Task.detached(priority: .userInitiated) {
             let ignoredBundleIDs = await Self.ignoredBundleIDs
             let runningApplications = NSWorkspace.shared.runningApplications
