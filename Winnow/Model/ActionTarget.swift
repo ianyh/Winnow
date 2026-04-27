@@ -15,7 +15,7 @@ enum ActionTarget {
         case .focusAppWindow(let window):
             return window.title
         case .runSlashCommand(let command):
-            return command.label
+            return command.trigger
         }
     }
     
@@ -24,8 +24,8 @@ enum ActionTarget {
         switch self {
         case .focusAppWindow(let window):
             return window.applicationTitle
-        case .runSlashCommand:
-            return nil
+        case .runSlashCommand(let command):
+            return command.label
         }
     }
     
