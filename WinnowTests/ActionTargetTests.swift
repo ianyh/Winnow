@@ -3,15 +3,18 @@ import Testing
 
 struct ActionTargetTests {
     @Test func slashCommandTitleIsCommandLabel() {
-        #expect(ActionTarget.runSlashCommand(command: .exit).title == "Quit Winnow")
-        #expect(ActionTarget.runSlashCommand(command: .hide).title == "Hide Winnow")
-        #expect(ActionTarget.runSlashCommand(command: .settings).title == "Open settings")
-        #expect(ActionTarget.runSlashCommand(command: .reload).title == "Reload windows")
+        #expect(ActionTarget.runSlashCommand(command: .exit).title == "/exit")
+        #expect(ActionTarget.runSlashCommand(command: .hide).title == "/hide")
+        #expect(ActionTarget.runSlashCommand(command: .settings).title == "/settings")
+        #expect(ActionTarget.runSlashCommand(command: .reload).title == "/reload")
     }
 
     @Test func slashCommandHasNoSubtitle() {
         for command in SlashCommand.allCases {
-            #expect(ActionTarget.runSlashCommand(command: command).subtitle == nil)
+            #expect(ActionTarget.runSlashCommand(command: .exit).subtitle == "Quit Winnow")
+            #expect(ActionTarget.runSlashCommand(command: .hide).subtitle == "Hide Winnow")
+            #expect(ActionTarget.runSlashCommand(command: .settings).subtitle == "Open settings")
+            #expect(ActionTarget.runSlashCommand(command: .reload).subtitle == "Reload windows")
         }
     }
 

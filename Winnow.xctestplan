@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "414CF4EE-BAB2-4739-A512-6E558B894B2B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Winnow.xcodeproj",
+      "identifier" : "40712C6F2F99A4AF0032E1BE",
+      "name" : "Winnow"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Winnow.xcodeproj",
+        "identifier" : "40712C7C2F99A4B10032E1BE",
+        "name" : "WinnowTests"
+      }
+    }
+  ],
+  "version" : 1
+}

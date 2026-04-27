@@ -29,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		401BA18E2F9EFC590019EF72 /* Winnow.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Winnow.xctestplan; sourceTree = "<group>"; };
 		40712C702F99A4AF0032E1BE /* Winnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Winnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40712C7D2F99A4B10032E1BE /* WinnowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WinnowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40712C872F99A4B10032E1BE /* WinnowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WinnowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +83,7 @@
 		40712C672F99A4AF0032E1BE = {
 			isa = PBXGroup;
 			children = (
+				401BA18E2F9EFC590019EF72 /* Winnow.xctestplan */,
 				40712C722F99A4AF0032E1BE /* Winnow */,
 				40712C802F99A4B10032E1BE /* WinnowTests */,
 				40712C8A2F99A4B10032E1BE /* WinnowUITests */,
