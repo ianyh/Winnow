@@ -3,6 +3,9 @@ import SwiftUI
 
 @main
 struct WinnowApp: App {
+    static let searchWindowID = "search-window"
+
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var appState = AppState()
 
     init() {
@@ -10,7 +13,7 @@ struct WinnowApp: App {
     }
 
     var body: some Scene {
-        Window("Window Search", id: "search-window") {
+        Window("Window Search", id: Self.searchWindowID) {
             ContentView()
                 .containerBackground(.thinMaterial, for: .window)
                 .toolbarVisibility(.hidden, for: .windowToolbar)
@@ -40,6 +43,12 @@ struct WinnowApp: App {
     }
 }
 
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        false
+    }
+}
+
 @MainActor
 @Observable
 final class AppState {
@@ -47,6 +56,9 @@ final class AppState {
         KeyboardShortcuts.onKeyUp(for: .launch) {
             NSApp.unhide(nil)
             NSRunningApplication.current.activate(options: [.activateAllWindows])
+            NSApp.windows
+                .first { $0.identifier?.rawValue == WinnowApp.searchWindowID }?
+                .makeKeyAndOrderFront(nil)
         }
     }
 }

@@ -1,3 +1,4 @@
+import AppKit
 import KeyboardShortcuts
 import SwiftUI
 
@@ -12,6 +13,11 @@ struct SettingsView: View {
                 .tabItem { Label("General", systemImage: "gearshape") }
         }
         .frame(width: 450, height: 250)
+        .onAppear {
+            NSApp.windows
+                .first { $0.identifier?.rawValue == WinnowApp.searchWindowID }?
+                .orderOut(nil)
+        }
     }
 }
 
