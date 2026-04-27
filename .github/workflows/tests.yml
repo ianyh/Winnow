@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build and run unit tests
-    runs-on: macos-latest
+    runs-on: macos-26
 
     steps:
       - name: Checkout
@@ -16,4 +16,3 @@ jobs:
       - name: Test
         run: |
           set -o pipefail && xcodebuild -project Winnow.xcodeproj/ -scheme Winnow clean test | xcbeautify
-
