@@ -24,7 +24,7 @@ struct ContentView: View {
         VStack(spacing: 0) {
             TextField("Search windows...", text: $query)
                 .textFieldStyle(.plain)
-                .font(.title2)
+                .font(.title)
                 .padding()
                 .focused($searchFocused)
                 .onKeyPress(.downArrow) {
@@ -49,23 +49,35 @@ struct ContentView: View {
                 }
 
             Divider()
+                .opacity(0.6)
 
             ScrollViewReader { proxy in
                 List(Array(filtered.enumerated()), id: \.element.windowID) { index, window in
                     Button {
                         focusWindow(window)
                     } label: {
-                        Text(window.title)
-                            .frame(maxWidth: .infinity, maxHeight: 500, alignment: .leading)
-                            .contentShape(Rectangle())
+                        VStack(alignment: .leading) {
+                            Text(window.title)
+                                .font(.title3)
+                                .frame(alignment: .leading)
+
+                            if let applicationTitle = window.applicationTitle {
+                                Text(applicationTitle)
+                                    .font(.caption)
+                                    .frame(alignment: .leading)
+                            }
+                        }.frame(maxWidth: .infinity, maxHeight: 100.0, alignment: .leading)
                     }
                     .buttonStyle(.plain)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 4)
+                    .listRowSeparator(.hidden)
                     .listRowBackground(
                         index == selectedIndex
                             ? Color.accentColor.opacity(0.25)
                             : Color.clear
                     )
+                    .containerBackground(.thinMaterial, for: .window)
                     .id(window.windowID)
                 }
                 .scrollContentBackground(.hidden)
@@ -109,11 +121,11 @@ struct ContentView: View {
 #if DEBUG
 #Preview("Populated") {
     ContentView(store: AppWindowStore(previewWindows: [
-        AppWindow(title: "Safari — Apple Developer", windowID: 1),
-        AppWindow(title: "Xcode — Winnow", windowID: 2),
-        AppWindow(title: "Terminal — winnow", windowID: 3),
-        AppWindow(title: "Slack — engineering", windowID: 4),
-        AppWindow(title: "Notes — Window Manager Plans", windowID: 5),
+        AppWindow(title: "Apple Developer", applicationTitle: "Safari", windowID: 1),
+        AppWindow(title: "Winnow", applicationTitle: "Xcode", windowID: 2),
+        AppWindow(title: "winnow", applicationTitle: "Terminal", windowID: 3),
+        AppWindow(title: "engineering", applicationTitle: "Slack", windowID: 4),
+        AppWindow(title: "Window Manager Plans", applicationTitle: nil, windowID: 5),
     ]))
 }
 

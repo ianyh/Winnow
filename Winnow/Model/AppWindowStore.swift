@@ -66,9 +66,14 @@ final class AppWindowStore {
             var appWindows: [AppWindow] = []
             for application in applications {
                 let visibleWindows = application.visibleWindows()
-                    .map { AppWindow(window: $0) }
+                guard !visibleWindows.isEmpty else {
+                    continue
+                }
+                let applicationTitle = application.title()
+                let visibleAppWindows = visibleWindows
+                    .map { AppWindow(window: $0, applicationTitle: applicationTitle) }
                     .filter { !$0.title.isEmpty }
-                appWindows.append(contentsOf: visibleWindows)
+                appWindows.append(contentsOf: visibleAppWindows)
             }
             return appWindows
         }.value
