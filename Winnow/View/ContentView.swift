@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.openSettings) private var openSettings
     @State private var store: AppWindowStore
     @State private var query = ""
     @State private var selectedIndex = 0
@@ -13,11 +14,19 @@ struct ContentView: View {
         _store = State(initialValue: store ?? AppWindowStore())
     }
 
-    var filtered: [AppWindow] {
-        guard !query.isEmpty else { return store.windows }
-        return store.windows.filter {
-            $0.title.localizedCaseInsensitiveContains(query) == true
+    private var filteredTargets: [ActionTarget] {
+        if query.starts(with: "/") {
+            return SlashCommand.matching(query).map { .runSlashCommand(command: $0) }
+        } else {
+            let windows = query.isEmpty ? store.windows : store.windows.filter {
+                $0.title.localizedCaseInsensitiveContains(query)
+            }
+            return windows.map { .focusAppWindow(window: $0) }
         }
+    }
+
+    private var activeCount: Int {
+        return filteredTargets.count
     }
 
     var body: some View {
@@ -28,8 +37,8 @@ struct ContentView: View {
                 .padding()
                 .focused($searchFocused)
                 .onKeyPress(.downArrow) {
-                    if !filtered.isEmpty {
-                        selectedIndex = min(selectedIndex + 1, filtered.count - 1)
+                    if activeCount > 0 {
+                        selectedIndex = min(selectedIndex + 1, activeCount - 1)
                     }
                     return .handled
                 }
@@ -38,8 +47,8 @@ struct ContentView: View {
                     return .handled
                 }
                 .onKeyPress(.return) {
-                    if filtered.indices.contains(selectedIndex) {
-                        focusWindow(filtered[selectedIndex])
+                    if filteredTargets.indices.contains(selectedIndex) {
+                        performAction(target: filteredTargets[selectedIndex])
                     }
                     return .handled
                 }
@@ -52,17 +61,17 @@ struct ContentView: View {
                 .opacity(0.6)
 
             ScrollViewReader { proxy in
-                List(Array(filtered.enumerated()), id: \.element.windowID) { index, window in
+                List(Array(filteredTargets.enumerated()), id: \.element.id) { index, target in
                     Button {
-                        focusWindow(window)
+                        performAction(target: target)
                     } label: {
                         VStack(alignment: .leading) {
-                            Text(window.title)
+                            Text(target.title)
                                 .font(.title3)
                                 .frame(alignment: .leading)
 
-                            if let applicationTitle = window.applicationTitle {
-                                Text(applicationTitle)
+                            if let subtitle = target.subtitle {
+                                Text(subtitle)
                                     .font(.caption)
                                     .frame(alignment: .leading)
                             }
@@ -78,13 +87,13 @@ struct ContentView: View {
                             : Color.clear
                     )
                     .containerBackground(.thinMaterial, for: .window)
-                    .id(window.windowID)
+                    .id(target.id)
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
                 .onChange(of: selectedIndex) { _, new in
-                    if filtered.indices.contains(new) {
-                        proxy.scrollTo(filtered[new].windowID, anchor: .center)
+                    if filteredTargets.indices.contains(new) {
+                        proxy.scrollTo(filteredTargets[new].id, anchor: .center)
                     }
                 }
             }
@@ -101,10 +110,33 @@ struct ContentView: View {
             if phase == .active { reset() }
         }
     }
-
-    private func focusWindow(_ window: AppWindow) {
-        window.focus()
-        NSApp.hide(nil)
+    
+    private func performAction(target: ActionTarget) {
+        switch target {
+        case .runSlashCommand(let command):
+            runSlashCommand(command)
+            if command != .reload {
+                query = ""
+                selectedIndex = 0
+            }
+        case .focusAppWindow(let window):
+            window.focus()
+        }
+    }
+    
+    private func runSlashCommand(_ command: SlashCommand) {
+        switch command {
+        case .exit:
+            NSApp.terminate(nil)
+        case .hide:
+            NSApp.hide(nil)
+        case .settings:
+            NSApp.unhide(nil)
+            NSRunningApplication.current.activate(options: [.activateAllWindows])
+            openSettings()
+        case .reload:
+            Task { @MainActor in await store.load() }
+        }
     }
 
     private func reset() {

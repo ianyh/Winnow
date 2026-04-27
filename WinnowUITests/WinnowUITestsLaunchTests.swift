@@ -8,7 +8,6 @@
 import XCTest
 
 final class WinnowUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
