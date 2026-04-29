@@ -121,6 +121,7 @@ struct ContentView: View {
             }
         case .focusAppWindow(let window):
             window.focus()
+            NSApp.hide(nil)
         }
     }
     
