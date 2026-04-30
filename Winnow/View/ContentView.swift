@@ -139,7 +139,7 @@ struct ContentView: View {
             NSRunningApplication.current.activate(options: [.activateAllWindows])
             openSettings()
         case .reload:
-            Task { @MainActor in await store.load() }
+            reset()
         }
     }
 
