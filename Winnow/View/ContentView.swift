@@ -96,13 +96,16 @@ struct ContentView: View {
                         proxy.scrollTo(filteredTargets[new].id, anchor: .center)
                     }
                 }
+                .onChange(of: query) { _, _ in
+                    selectedIndex = 0
+                    if let first = filteredTargets.first {
+                        proxy.scrollTo(first.id, anchor: .top)
+                    }
+                }
             }
             .scrollContentBackground(.hidden)
         }
         .frame(width: 500, height: 500)
-        .onChange(of: query) { _, _ in
-            selectedIndex = 0
-        }
         .onAppear {
             reset()
         }
